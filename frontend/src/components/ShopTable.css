@@ -1,0 +1,31 @@
+.shoptable-area {
+     width: 100%;
+    margin: 20px auto
+}
+
+.shoptable-area th {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.shoptable-area td {
+ vertical-align: middle;
+}
+.open-status {
+    text-align: center;
+}
+
+.md-none {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .shoptable-area {
+        width: 100%;
+        margin: 0 auto
+    }
+
+    .md-none {
+        display: block;
+    }
+}
