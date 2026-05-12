@@ -7,16 +7,12 @@ import {
     DirectionsRenderer
 } from '@react-google-maps/api';
 import { Button, Stack } from 'react-bootstrap';
-import { CSSProperties, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SearchButton } from './SearchButton';
 import { ShopTable } from './ShopTable';
 import { SelectDistance } from './SelectDistance';
 import './Map.css';
-const containerStyle: CSSProperties = {
-    width: '90%',
-    height: '400px',
-    margin: '0 auto'
-};
+
 
 const Map = () => {
     const [center, setCenter] = useState({
@@ -39,7 +35,6 @@ const Map = () => {
         )
             .then((res) => res.json())
             .then((data) => {
-                // console.log('APIデータ:', data);
                 setShops(data);
             })
             .catch((err) => console.error(err));
@@ -135,7 +130,7 @@ const Map = () => {
                                     lat: routeTarget.lat,
                                     lng: routeTarget.lng
                                 },
-                                travelMode: 'WALKING'
+                                travelMode: google.maps.TravelMode.WALKING
                             }}
                             callback={(result, status) => {
                                 if (status === 'OK') {
