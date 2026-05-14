@@ -49,7 +49,7 @@ app.get('/shops', async (req, res) => {
                             longitude: Number(lng)
                         },
                         // radius: searchRadius,
-                        radius: apiRadius,
+                        radius: apiRadius
                     }
                 }
             },
@@ -99,6 +99,8 @@ app.get('/', (req, res) => {
     res.send('API running');
 });
 
-app.listen(3000, () => {
-    console.log('Server running on port 3000');
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+    console.log(`server running on ${PORT}`);
 });
