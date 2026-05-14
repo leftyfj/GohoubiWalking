@@ -31,7 +31,8 @@ const Map = () => {
 
     const fetchShops = () => {
         fetch(
-            `http://localhost:3000/shops?lat=${center.lat}&lng=${center.lng}&radius=${radius}`
+            // `http://localhost:3000/shops?lat=${center.lat}&lng=${center.lng}&radius=${radius}`
+            `https://gohoubiwalking.onrender.com/shops?lat=${center.lat}&lng=${center.lng}&radius=${radius}`
         )
             .then((res) => res.json())
             .then((data) => {
