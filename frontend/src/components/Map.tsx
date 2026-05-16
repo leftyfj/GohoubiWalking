@@ -101,6 +101,7 @@ const Map = () => {
                             <Stack gap={2}>
                                 <h3>{selectedShop.name}</h3>
                                 <p>評価：{selectedShop.rating}</p>
+                                <p>{selectedShop.placeName}</p>
                                 <Button
                                     variant="info"
                                     size="sm"
