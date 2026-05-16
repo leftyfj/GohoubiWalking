@@ -101,7 +101,6 @@ const Map = () => {
                             <Stack gap={2}>
                                 <h3>{selectedShop.name}</h3>
                                 <p>評価：{selectedShop.rating}</p>
-                                <p>{selectedShop.placeName}</p>
                                 <Button
                                     variant="info"
                                     size="sm"
@@ -115,8 +114,9 @@ const Map = () => {
                                     店舗までのルート
                                 </Button>
                                 <a
-                                    // href={`https://www.google.com/maps/place/?q=place_id:${selectedShop.id}`}
-                                    href={`https://www.google.com/maps/search/?api=1&query_place_id=${selectedShop.placeName.replace(
+                                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                                        selectedShop.name
+                                    )}&query_place_id=${selectedShop.placeName.replace(
                                         'places/',
                                         ''
                                     )}`}
