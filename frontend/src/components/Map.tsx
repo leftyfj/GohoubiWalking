@@ -114,7 +114,11 @@ const Map = () => {
                                     店舗までのルート
                                 </Button>
                                 <a
-                                    href={`https://www.google.com/maps/place/?q=place_id:${selectedShop.id}`}
+                                    // href={`https://www.google.com/maps/place/?q=place_id:${selectedShop.id}`}
+                                    href={`https://www.google.com/maps/search/?api=1&query_place_id=${selectedShop.placeName.replace(
+                                        'places/',
+                                        ''
+                                    )}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >

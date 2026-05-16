@@ -58,7 +58,8 @@ app.get('/shops', async (req, res) => {
                     'Content-Type': 'application/json',
                     'X-Goog-Api-Key': process.env.GOOGLE_API_KEY,
                     'X-Goog-FieldMask':
-                        'places.id,places.displayName,places.rating,places.location,places.currentOpeningHours.openNow,places.priceLevel',
+                        // 'places.id,places.displayName,places.rating,places.location,places.currentOpeningHours.openNow,places.priceLevel',
+                        'places.id,places.name,places.displayName,places.rating,places.location,places.currentOpeningHours.openNow,places.priceLevel',
                     'Accept-Language': 'ja' // ← これ
                 }
             }
@@ -69,6 +70,7 @@ app.get('/shops', async (req, res) => {
         const shops = results
             .map((place) => ({
                 id: place.id,
+                placeName:place.name,
                 name: place.displayName?.text,
                 lat: place.location?.latitude,
                 lng: place.location?.longitude,
