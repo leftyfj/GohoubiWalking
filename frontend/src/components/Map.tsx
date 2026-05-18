@@ -108,7 +108,8 @@ const Map = () => {
                                         setDirections(null);
                                         setRouteTarget(selectedShop); // ← ここが重要
                                         setShowRoute(true);
-                                        setSelectedShop(null); // これでOKになる
+                                       // setSelectedShop(null);
+                                       // // これでOKになる
                                     }}
                                 >
                                     店舗までのルート
