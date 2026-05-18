@@ -140,6 +140,7 @@ const Map = () => {
                                 travelMode: google.maps.TravelMode.WALKING
                             }}
                             callback={(result, status) => {
+                                console.log('status=', status);
                                 if (status === 'OK') {
                                     setDirections(result);
                                     setShowRoute(false); // ← これが重要
