@@ -1,0 +1,11 @@
+.distance-select {
+    width: auto;
+}
+
+@media (max-width: 768px) {
+    .distance-select {
+        font-size:1.25rem;
+        padding: 0.8rem 1rem;
+        height: auto;
+    }
+}
