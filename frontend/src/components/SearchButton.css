@@ -1,0 +1,14 @@
+
+.search-button {
+    display: block;
+    margin: 20px auto;
+    width: auto;
+}
+
+/* スマホ */
+@media (max-width: 768px) {
+    .search-button {
+        font-size: 1.25rem;
+        padding: 0.8rem 1.5rem;
+    }
+}
