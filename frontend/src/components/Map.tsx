@@ -16,10 +16,15 @@ import './Map.css';
 
 
 const Map = () => {
-    const [center, setCenter] = useState({
-        lat: 35.681236,
-        lng: 139.767125
-    });
+    // const [center, setCenter] = useState({
+    //     lat: 35.681236,
+    //     lng: 139.767125
+    // });
+
+    const [center, setCenter] = useState<{
+        lat: number;
+        lng: number;
+    } | null>(null);
 
     const [selectedShop, setSelectedShop] = useState<any>(null);
     const [directions, setDirections] = useState<any>(null);
@@ -68,116 +73,120 @@ const Map = () => {
                 <ShopTable shops={shops} setSelectedShop={setSelectedShop} />
             </div>
 
-            <LoadScript
-                googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
-            >
-                <GoogleMap
-                    // mapContainerStyle={containerStyle}
-                    mapContainerClassName="google-map-container"
-                    center={center}
-                    zoom={15}
+                <LoadScript
+                    googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
                 >
-                    {/* 現在地に赤いマーカーを表示 */}
-                    {center && <Marker position={center} />}
-                    {/* 店舗情報を緑色のマーカーで表示 */}
-                    {shops.map((shop) => (
-                        <Marker
-                            key={shop.id}
-                            position={{ lat: shop.lat, lng: shop.lng }}
-                            title={shop.name}
-                            icon={{
-                                url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
-                            }}
-                            onClick={() => {
-                                setSelectedShop(shop);
-                                setShowRoute(false);
-                            }}
-                        />
-                    ))}
+                      {center && (
+                    <GoogleMap
+                        mapContainerClassName="google-map-container"
+                        center={center}
+                        zoom={15}
+                    >
+                        {/* 現在地に赤いマーカーを表示 */}
+                        {center && <Marker position={center} />}
+                        {/* 店舗情報を緑色のマーカーで表示 */}
+                        {shops.map((shop) => (
+                            <Marker
+                                key={shop.id}
+                                position={{ lat: shop.lat, lng: shop.lng }}
+                                title={shop.name}
+                                icon={{
+                                    url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+                                }}
+                                onClick={() => {
+                                    setSelectedShop(shop);
+                                    setShowRoute(false);
+                                }}
+                            />
+                        ))}
 
-                    {selectedShop && (
-                        <InfoWindow
-                            position={{
-                                lat: selectedShop.lat,
-                                lng: selectedShop.lng
-                            }}
-                            onCloseClick={() => setSelectedShop(null)}
-                        >
-                            <Stack gap={2}>
-                                <div className="close-button-area">
-                                    <h3 className="fw-bold">
-                                        {selectedShop.name}
-                                    </h3>
-                                    <Button className="close-button"
-                                        variant="light"
+                        {selectedShop && (
+                            <InfoWindow
+                                position={{
+                                    lat: selectedShop.lat,
+                                    lng: selectedShop.lng
+                                }}
+                                onCloseClick={() => setSelectedShop(null)}
+                            >
+                                <Stack gap={2}>
+                                    <div className="close-button-area">
+                                        <h3 className="fw-bold">
+                                            {selectedShop.name}
+                                        </h3>
+                                        <Button
+                                            className="close-button"
+                                            variant="light"
+                                            size="sm"
+                                            onClick={() =>
+                                                setSelectedShop(null)
+                                            }
+                                        >
+                                            ×
+                                        </Button>
+                                    </div>
+                                    <Button
+                                        variant="info"
                                         size="sm"
-                                        onClick={() => setSelectedShop(null)}
+                                        onClick={() => {
+                                            setDirections(null);
+                                            setRouteTarget(selectedShop); // ← ここが重要
+                                            setShowRoute(true);
+                                            // setSelectedShop(null);
+                                            // // これでOKになる
+                                        }}
                                     >
-                                        ×
+                                        店舗までのルート
                                     </Button>
-                                </div>
-                                <Button
-                                    variant="info"
-                                    size="sm"
-                                    onClick={() => {
-                                        setDirections(null);
-                                        setRouteTarget(selectedShop); // ← ここが重要
-                                        setShowRoute(true);
-                                        // setSelectedShop(null);
-                                        // // これでOKになる
-                                    }}
-                                >
-                                    店舗までのルート
-                                </Button>
-                            </Stack>
-                        </InfoWindow>
-                    )}
-                    {routeTarget && showRoute && (
-                        <DirectionsService
-                            options={{
-                                origin: center,
-                                destination: {
-                                    lat: routeTarget.lat,
-                                    lng: routeTarget.lng
-                                },
-                                travelMode: google.maps.TravelMode.WALKING
-                            }}
-                            callback={(result, status) => {
-                                console.log('status=', status);
-                                if (status === 'OK') {
-                                    setDirections(result);
-                                    setShowRoute(false); // ← これが重要
-                                }
-                            }}
-                        />
-                    )}
-                    {directions && (
-                        <DirectionsRenderer
-                            options={{
-                                directions: directions,
-                                suppressMarkers: true
-                            }}
-                        />
-                    )}
-                </GoogleMap>
-            </LoadScript>
-
-            <Modal
-            show={loading}
-            centered
-            backdrop="static"
-            keyboard={false}
-            >
+                                </Stack>
+                            </InfoWindow>
+                        )}
+                        {routeTarget && showRoute && (
+                            <DirectionsService
+                                options={{
+                                    origin: center,
+                                    destination: {
+                                        lat: routeTarget.lat,
+                                        lng: routeTarget.lng
+                                    },
+                                    travelMode: google.maps.TravelMode.WALKING
+                                }}
+                                callback={(result, status) => {
+                                    console.log('status=', status);
+                                    if (status === 'OK') {
+                                        setDirections(result);
+                                        setShowRoute(false); // ← これが重要
+                                    }
+                                }}
+                            />
+                        )}
+                        {directions && (
+                            <DirectionsRenderer
+                                options={{
+                                    directions: directions,
+                                    suppressMarkers: true
+                                }}
+                            />
+                        )}
+                    </GoogleMap>
+            )}
+                </LoadScript>
+            <Modal show={loading} centered backdrop="static" keyboard={false}>
                 <Modal.Body className="text-center p-4">
-
                     <Spinner animation="border" />
 
-                    <p className="mt-3">
-                        ご褒美を探しています...
-                    </p>
-
+                    <p className="mt-3">ご褒美を探しています...</p>
                 </Modal.Body>
             </Modal>
+
+            {!center && (
+                <Modal show={true} centered backdrop="static" keyboard={false}>
+                    <Modal.Body className="text-center p-4">
+                        <Spinner animation="border" />
+
+                        <p className="mt-3">現在地を取得しています...</p>
+                    </Modal.Body>
+                </Modal>
+            )}
         </>
     );
 };
