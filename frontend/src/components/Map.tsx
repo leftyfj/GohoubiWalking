@@ -6,7 +6,8 @@ import {
     DirectionsService,
     DirectionsRenderer
 } from '@react-google-maps/api';
-import { Button, Stack } from 'react-bootstrap';
+import { Button, Stack,  Modal,
+    Spinner} from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { SearchButton } from './SearchButton';
 import { ShopTable } from './ShopTable';
@@ -39,7 +40,7 @@ const Map = () => {
             .then((data) => {
                 setShops(data);
             })
-            .catch((err) => console.error(err));
+            .catch((err) => console.error(err))
             .finally(() => {
                 setLoading(false);
             });
