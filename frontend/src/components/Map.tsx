@@ -99,8 +99,18 @@ const Map = () => {
                             onCloseClick={() => setSelectedShop(null)}
                         >
                             <Stack gap={2}>
-                                <h3 className="fw-bold">{selectedShop.name}</h3>
-                                {/* <p>評価：{selectedShop.rating}</p> */}
+                                <div className="close-button">
+                                    <h3 className="fw-bold">
+                                        {selectedShop.name}
+                                    </h3>
+                                    <Button
+                                        variant="light"
+                                        size="sm"
+                                        onClick={() => setSelectedShop(null)}
+                                    >
+                                        ×
+                                    </Button>
+                                </div>
                                 <Button
                                     variant="info"
                                     size="sm"
@@ -108,24 +118,12 @@ const Map = () => {
                                         setDirections(null);
                                         setRouteTarget(selectedShop); // ← ここが重要
                                         setShowRoute(true);
-                                       // setSelectedShop(null);
-                                       // // これでOKになる
+                                        // setSelectedShop(null);
+                                        // // これでOKになる
                                     }}
                                 >
                                     店舗までのルート
                                 </Button>
-                                {/* <a
-                                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                                        selectedShop.name
-                                    )}&query_place_id=${selectedShop.placeName.replace(
-                                        'places/',
-                                        ''
-                                    )}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    Googleマップで詳細を見る
-                                </a> */}
                             </Stack>
                         </InfoWindow>
                     )}

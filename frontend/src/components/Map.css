@@ -12,6 +12,11 @@
   margin: 0 auto;
 }
 
+.close-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 @media (max-width: 768px) {
   .container-area {
     width: 100%;
