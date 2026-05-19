@@ -25,13 +25,14 @@ const Map = () => {
     const [showRoute, setShowRoute] = useState(false);
     const [routeTarget, setRouteTarget] = useState<any>(null);
     const [shops, setShops] = useState<any[]>([]);
+    const [loading, setLoading] = useState(false);
 
     // 検索範囲からデフォルトを1000mに設定
     const [radius, setRadius] = useState(1000);
 
     const fetchShops = () => {
+        setLoading(true);
         fetch(
-            // `http://localhost:3000/shops?lat=${center.lat}&lng=${center.lng}&radius=${radius}`
             `https://gohoubiwalking.onrender.com/shops?lat=${center.lat}&lng=${center.lng}&radius=${radius}`
         )
             .then((res) => res.json())
@@ -39,6 +40,9 @@ const Map = () => {
                 setShops(data);
             })
             .catch((err) => console.error(err));
+            .finally(() => {
+                setLoading(false);
+            });
     };
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(
@@ -156,6 +160,23 @@ const Map = () => {
                     )}
                 </GoogleMap>
             </LoadScript>
+
+            <Modal
+            show={loading}
+            centered
+            backdrop="static"
+            keyboard={false}
+            >
+                <Modal.Body className="text-center p-4">
+
+                    <Spinner animation="border" />
+
+                    <p className="mt-3">
+                        ご褒美を探しています...
+                    </p>
+
+                </Modal.Body>
+            </Modal>
         </>
     );
 };
