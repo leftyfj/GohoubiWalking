@@ -54,10 +54,12 @@ const Map = () => {
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 console.log(position.coords);
-                setCenter({
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                });
+                setTimeout(() => {
+                    setCenter({
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    });
+                }, 5000);
             },
             (error) => {
                 console.error('位置情報取得失敗', error);
