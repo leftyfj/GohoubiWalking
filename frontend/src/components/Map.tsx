@@ -53,6 +53,7 @@ const Map = () => {
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(
             (position) => {
+                console.log(position.coords);
                 setCenter({
                     lat: position.coords.latitude,
                     lng: position.coords.longitude
@@ -78,6 +79,7 @@ const Map = () => {
                 >
                       {center && (
                     <GoogleMap
+                            key={`${center?.lat}-${center?.lng}`}
                         mapContainerClassName="google-map-container"
                         center={center}
                         zoom={15}
@@ -170,13 +172,13 @@ const Map = () => {
                     </GoogleMap>
             )}
                 </LoadScript>
-            <Modal show={loading} centered backdrop="static" keyboard={false}>
-                <Modal.Body className="text-center p-4">
-                    <Spinner animation="border" />
+                <Modal show={loading} centered backdrop="static" keyboard={false}>
+                    <Modal.Body className="text-center p-4">
+                        <Spinner animation="border" />
 
-                    <p className="mt-3">ご褒美を探しています...</p>
-                </Modal.Body>
-            </Modal>
+                        <p className="mt-3">ご褒美を探しています...</p>
+                    </Modal.Body>
+                </Modal>
 
             {!center && (
                 <Modal show={true} centered backdrop="static" keyboard={false}>
