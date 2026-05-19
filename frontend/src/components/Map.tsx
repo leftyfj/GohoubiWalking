@@ -99,11 +99,11 @@ const Map = () => {
                             onCloseClick={() => setSelectedShop(null)}
                         >
                             <Stack gap={2}>
-                                <div className="close-button">
+                                <div className="close-button-area">
                                     <h3 className="fw-bold">
                                         {selectedShop.name}
                                     </h3>
-                                    <Button
+                                    <Button className="close-button"
                                         variant="light"
                                         size="sm"
                                         onClick={() => setSelectedShop(null)}
