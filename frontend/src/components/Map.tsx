@@ -100,7 +100,7 @@ const Map = () => {
                         >
                             <Stack gap={2}>
                                 <div className="close-button-area">
-                                    <h3 className="fw-bold">
+                                    <h3 className="fw-bold mt-3">
                                         {selectedShop.name}
                                     </h3>
                                     <Button className="close-button"
