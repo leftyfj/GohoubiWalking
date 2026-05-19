@@ -99,8 +99,8 @@ const Map = () => {
                             onCloseClick={() => setSelectedShop(null)}
                         >
                             <Stack gap={2}>
-                                <h3>{selectedShop.name}</h3>
-                                <p>評価：{selectedShop.rating}</p>
+                                <h3 className="fw-bold">{selectedShop.name}</h3>
+                                {/* <p>評価：{selectedShop.rating}</p> */}
                                 <Button
                                     variant="info"
                                     size="sm"
@@ -114,7 +114,7 @@ const Map = () => {
                                 >
                                     店舗までのルート
                                 </Button>
-                                <a
+                                {/* <a
                                     href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
                                         selectedShop.name
                                     )}&query_place_id=${selectedShop.placeName.replace(
@@ -125,7 +125,7 @@ const Map = () => {
                                     rel="noopener noreferrer"
                                 >
                                     Googleマップで詳細を見る
-                                </a>
+                                </a> */}
                             </Stack>
                         </InfoWindow>
                     )}

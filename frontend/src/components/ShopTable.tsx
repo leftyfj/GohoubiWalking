@@ -13,6 +13,7 @@ export const ShopTable = ({shops, setSelectedShop}:ShopProps) => {
              <thead>
                  <tr>
                      <th>店舗名</th>
+                     <th>情報</th>
                      <th>評価</th>
                      <th>距離</th>
                      <th>
@@ -20,7 +21,6 @@ export const ShopTable = ({shops, setSelectedShop}:ShopProps) => {
                          <br className="md-none" />
                          (🟢/✘)
                      </th>
-                     {/* <th className="d-none d-md-table-cell">価格帯</th> */}
                  </tr>
              </thead>
              <tbody>
@@ -33,6 +33,20 @@ export const ShopTable = ({shops, setSelectedShop}:ShopProps) => {
                          style={{ cursor: 'pointer' }}
                      >
                          <td>{shop.name}</td>
+                         <td>
+                             <a
+                                 href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                                     shop.name
+                                 )}&query_place_id=${shop.placeName.replace(
+                                     'places/',
+                                     ''
+                                 )}`}
+                                 target="_blank"
+                                 rel="noopener noreferrer"
+                             >
+                                 詳細
+                             </a>
+                         </td>
                          <td>{shop.rating?.toFixed(1) ?? '-'}</td>
                          <td>
                              {shop.distance < 1
@@ -45,20 +59,6 @@ export const ShopTable = ({shops, setSelectedShop}:ShopProps) => {
                                  : shop.openNow === false
                                    ? '✘'
                                    : '-'}
-                         </td>
-                         {/* <td className="d-none d-md-table-cell">
-                             {shop.priceLevel
-                                 ? '¥'.repeat(shop.priceLevel)
-                                 : '-'}
-                         </td> */}
-                         <td>
-                             <a
-                                 href={`https://www.google.com/maps/place/?q=place_id:${shop.id}`}
-                                 target="_blank"
-                                 rel="noopener noreferrer"
-                             >
-                                 詳細
-                             </a>
                          </td>
                      </tr>
                  ))}
