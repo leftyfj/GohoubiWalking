@@ -12,7 +12,12 @@ export const ShopTable = ({shops, setSelectedShop}:ShopProps) => {
          <Table striped bordered hover>
              <thead>
                  <tr>
-                     <th>店舗名</th>
+                     <th>
+                         店舗名
+                         <small className="d-block text-muted">
+                             タップで地図上に表示
+                         </small>
+                     </th>
                      <th>情報</th>
                      <th>評価</th>
                      <th>距離</th>
