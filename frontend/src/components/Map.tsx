@@ -84,7 +84,7 @@ const Map = () => {
 
                 <SearchButton onSearch={fetchShops} radius={radius} />
 
-                <ShopTable shops={shops} setSelectedShop={setSelectedShop} />
+                {/* <ShopTable shops={shops} setSelectedShop={setSelectedShop} /> */}
             </div>
 
             <LoadScript
@@ -184,6 +184,9 @@ const Map = () => {
                     )}
                 </GoogleMap>
             </LoadScript>
+            <div className="container-area">
+                <ShopTable shops={shops} setSelectedShop={setSelectedShop} />
+            </div>
 
             <Modal show={loading} centered backdrop="static" keyboard={false}>
                 <Modal.Body className="text-center p-4">
