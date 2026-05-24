@@ -13,7 +13,7 @@ import { useEffect, useState } from 'react';
 import { SearchButton } from './SearchButton';
 import { ShopTable } from './ShopTable';
 import { SelectDistance } from './SelectDistance';
-
+import { SelectReward } from './SelectReward';
 import './Map.css';
 
 const Map = () => {
@@ -30,6 +30,7 @@ const Map = () => {
     const [loading, setLoading] = useState(false);
 
     const [radius, setRadius] = useState(1000);
+    const [reward, setReward] = useState('');
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(
@@ -47,6 +48,10 @@ const Map = () => {
 
     const fetchShops = () => {
         // ★ null対策追加
+        if (!reward) {
+            alert('ご褒美を選択してください');
+            return;
+        }
         if (!center) return;
 
         setLoading(true);
@@ -80,18 +85,18 @@ const Map = () => {
 
     return (
         <>
-            <div className="container-area">
+            <Stack gap={3} className="container-area">
+                <SelectReward reward={reward} setReward={setReward} />
                 <SelectDistance radius={radius} setRadius={setRadius} />
 
                 <SearchButton onSearch={fetchShops} radius={radius} />
 
                 {/* <ShopTable shops={shops} setSelectedShop={setSelectedShop} /> */}
-            </div>
+            </Stack>
 
             <LoadScript
                 googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
             >
-
                 <GoogleMap
                     mapContainerStyle={{
                         width: '90%',

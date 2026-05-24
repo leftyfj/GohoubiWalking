@@ -1,0 +1,13 @@
+.reward-select {
+    width: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+@media (max-width:768px) {
+    .reward-select{
+        font-size:1.25rem;
+        padding:0.8rem 1rem;
+        height:auto;
+    }
+}

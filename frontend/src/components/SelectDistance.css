@@ -1,5 +1,7 @@
 .distance-select {
     width: auto;
+    display: block;
+    margin: 0 auto;
 }
 
 @media (max-width: 768px) {
