@@ -64,6 +64,7 @@ const Map = () => {
             });
     };
 
+    console.log(center);
     // ★ center未取得時はここで終了
     if (!center) {
         return (
@@ -90,8 +91,13 @@ const Map = () => {
             <LoadScript
                 googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
             >
+
                 <GoogleMap
-                    mapContainerClassName="google-map-container"
+                    mapContainerStyle={{
+                        width: '90%',
+                        height: '400px',
+                        margin: '0 auto'
+                    }}
                     center={center}
                     zoom={15}
                 >
