@@ -25,8 +25,8 @@ function getDistance(lat1, lng1, lat2, lng2) {
 }
 
 app.get('/shops', async (req, res) => {
-    const { lat, lng, radius } = req.query;
-    // const searchRadius = Number(radius) || 1000;
+    const { lat, lng, radius, genre } = req.query;
+    //  console.log('genre=', genre);
     const selectedRadius = Number(radius) || 1000;
     const apiRadius = 5000;
     if (!lat || !lng) {
@@ -34,9 +34,16 @@ app.get('/shops', async (req, res) => {
     }
 
     // ★ OR検索クエリ
-    const query =
+    const querySweets =
         '甘味処 OR 和菓子 OR ケーキ OR スイーツ OR デザート OR たい焼き OR どら焼き OR 団子 OR だんご OR 大福 OR パフェ OR パンケーキ OR アイスクリーム OR ジェラート OR チョコレート OR まんじゅう OR シュークリーム OR エクレア OR 羊羹 OR ぼた餅 OR おはぎ OR あんぱん';
+    const queryRamen = 'ラーメン';
+    let query = querySweets;
 
+    if (genre === 'ramen') {
+        query = queryRamen;
+    }
+
+    // console.log('query=', query);
     try {
         const response = await axios.post(
             'https://places.googleapis.com/v1/places:searchText',
@@ -48,7 +55,6 @@ app.get('/shops', async (req, res) => {
                             latitude: Number(lat),
                             longitude: Number(lng)
                         },
-                        // radius: searchRadius,
                         radius: apiRadius
                     }
                 }

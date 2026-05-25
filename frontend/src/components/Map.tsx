@@ -53,11 +53,12 @@ const Map = () => {
             return;
         }
         if (!center) return;
-
+        // console.log('reward=', reward);
         setLoading(true);
 
         fetch(
-            `https://gohoubiwalking.onrender.com/shops?lat=${center.lat}&lng=${center.lng}&radius=${radius}`
+            `https://gohoubiwalking.onrender.com/shops?lat=${center.lat}&lng=${center.lng}&radius=${radius}&genre=${reward}`
+            // `http://localhost:3000/shops?lat=${center.lat}&lng=${center.lng}&radius=${radius}&genre=${reward}`
         )
             .then((res) => res.json())
             .then((data) => {
@@ -69,14 +70,13 @@ const Map = () => {
             });
     };
 
-    console.log(center);
+
     // ★ center未取得時はここで終了
     if (!center) {
         return (
             <Modal show={true} centered backdrop="static" keyboard={false}>
                 <Modal.Body className="text-center p-4">
                     <Spinner animation="border" />
-
                     <p className="mt-3">現在地を取得しています...</p>
                 </Modal.Body>
             </Modal>
